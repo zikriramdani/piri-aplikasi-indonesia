@@ -1,5 +1,5 @@
 <div ng-controller="DashboardController">
-	<div class="jumbotron" style="background-color: #fff; height: calc(95vh);">
+	<div class="jumbotron mt-3" style="background-color: #fff; height: calc(95vh);">
 		<div class="btn-group my-3" role="group" aria-label="Basic example">
 		  	<button type="button" class="btn btn-secondary" ng-click="tambahBarang()">Tambah</button>
 		</div>
@@ -10,8 +10,8 @@
 				      	<th scope="col">#</th>
 				      	<th scope="col">Title</th>
 				      	<th scope="col">Body</th>
-				      	<th scope="col">Create</th>
-				      	<th scope="col">Update</th>
+				      	<th scope="col" class="">Create</th>
+				      	<th scope="col" class="">Update</th>
 				      	<th >Action</th>
 				    </tr>
 			  	</thead>
@@ -20,8 +20,8 @@
 				      	<th scope="row">1</th>
 				      	<td>Mark</td>
 				      	<td>Otto</td>
-				      	<td>@mdo</td>
-				      	<td>@mdo</td>
+				      	<td class="">@mdo</td>
+				      	<td class="">@mdo</td>
 				      	<td>
 					      	<button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal" ng-click="editBarang(b)">
 	                            <i class="glyphicon glyphicon-pencil"></i>
