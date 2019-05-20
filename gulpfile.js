@@ -18,7 +18,7 @@ var gutil = require('gulp-util');
 
 // untuk menjalankan SASS (compile dari SASS menjadi CSS dengan destinasi folder src)
 gulp.task('sass', function () {
-  return gulp.src('./src/assets/sass/*.scss')
+  	return gulp.src('./src/assets/sass/*.scss')
     //.pipe(sass().on('error', sass.logError))
     .pipe(plumber({
         errorHandler:function(err){
