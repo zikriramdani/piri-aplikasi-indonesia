@@ -42,7 +42,7 @@ gulp.task('sass', function () {
 // });
 
 // // Deploy to Build Directory
-gulp.task('deploy', function(){
+gulp.task('build', function(){
 
 	// optimasi css
 	var cssOptimize = gulp.src('./src/*.css')
