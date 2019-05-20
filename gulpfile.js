@@ -91,6 +91,6 @@ gulp.task('default', function(){
             baseDir: "./src"
         }
     });
-    gulp.watch('./src/**/*').on('change', reload);
+    gulp.watch('./src/**/*').on('change', gulp.series(reload));
     gulp.watch('./src/assets/sass/*.scss', gulp.series('sass'));
 });
