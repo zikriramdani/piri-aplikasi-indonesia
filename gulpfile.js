@@ -16,18 +16,17 @@ var htmlmin = require('gulp-htmlmin');
 var zip = require('gulp-zip');
 var gutil = require('gulp-util');
 
- 
 // untuk menjalankan SASS (compile dari SASS menjadi CSS dengan destinasi folder src)
 gulp.task('sass', function () {
   return gulp.src('./src/assets/sass/*.scss')
     //.pipe(sass().on('error', sass.logError))
     .pipe(plumber({
-    	errorHandler:function(err){
-    		notify.onError({
-    			title : "Gulp error in " + err.plugin,
-    			message : err.toString()
-    		})(err)
-    	}
+        errorHandler:function(err){
+            notify.onError({
+                title : "Gulp error in " + err.plugin,
+                message : err.toString()
+            })(err)
+        }
     }))
     .pipe(sass())
     .pipe(plumber.stop())
@@ -36,44 +35,45 @@ gulp.task('sass', function () {
 });
 
 // // Clean Build Directory
-// gulp.task('cleanBuild',function(){
-//     return gulp.src('dist', {read: false})
-//     .pipe(clean());
-// });
+gulp.task('cleanBuild',function(){
+    return gulp.src('dist', {read: false})
+    .pipe(clean());
+});
 
-// // Deploy to Build Directory
+// Deploy to Build Directory
+// gulp.task('build', ['cleanBuild'], function(){
 gulp.task('build', function(){
 
-	// optimasi css
-	var cssOptimize = gulp.src('./src/*.css')
-	.pipe(cssnano())
-	.pipe(gulp.dest('dist/css'));
+    // optimasi css
+    var cssOptimize = gulp.src('./src/*.css')
+    .pipe(cssnano())
+    .pipe(gulp.dest('dist/css'));
 
-	// menggabung semua file js dan optimasi
-	var jsOptimize = gulp.src('./src/assets/js/*.js')
-	.pipe(concat('all.js'))
-	.pipe(uglify())
-	.pipe(gulp.dest('dist/js'));
+    // menggabung semua file js dan optimasi
+    var jsOptimize = gulp.src('./src/assets/js/*.js')
+    .pipe(concat('all.js'))
+    .pipe(uglify())
+    .pipe(gulp.dest('dist/js'));
 
-	// optimasi image
-	var imgOptimize = gulp.src('./src/assets/images/*')
-	    .pipe(imagemin())
-	    .pipe(gulp.dest('dist/images'))
+    // optimasi image
+    var imgOptimize = gulp.src('./src/assets/images/*')
+        .pipe(imagemin())
+        .pipe(gulp.dest('dist/images'))
 
-	// optimasi html
-	var htmlOptimize = gulp.src('./src/*.html')
-	.pipe(htmlmin({collapseWhitespace: true}))
-	.pipe(gulp.dest('dist'));
+    // optimasi html
+    var htmlOptimize = gulp.src('./src/*.html')
+    .pipe(htmlmin({collapseWhitespace: true}))
+    .pipe(gulp.dest('dist'));
 
-	// fonts folder
-	var fonts= gulp.src('./src/assets/fonts/**')
-	.pipe(gulp.dest('dist/fonts'));
+    // fonts folder
+    var fonts= gulp.src('./src/assets/fonts/**')
+    .pipe(gulp.dest('dist/fonts'));
 
-	return merge(cssOptimize,jsOptimize,imgOptimize,htmlOptimize,fonts); 
+    return merge(cssOptimize,jsOptimize,imgOptimize,htmlOptimize,fonts); 
 })
 
 // Deploy to Zip file
-// gulp.task('deployZip',['deploy'],function(){
+// gulp.task('buildZip',['deploy'],function(){
 //     var zipNow = gulp.src('dist/**')
 //     .pipe(zip('deploy.zip'))
 //     .pipe(gulp.dest('dist'));
@@ -92,5 +92,5 @@ gulp.task('default', function(){
         }
     });
     gulp.watch('./src/**/*').on('change', reload);
-    gulp.watch('./src/assets/sass/*.scss',['sass']);
+    gulp.watch('./src/assets/sass/*.scss', gulp.series('sass'));
 });
