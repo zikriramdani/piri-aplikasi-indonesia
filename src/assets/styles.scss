@@ -1,6 +1,9 @@
-$primary-font-color: #333333;
-$primary-font-size: 14px;
-p {
-  font-size: $primary-font-size;
-  color: $primary-font-color;
-}
+/*------------------------------------------------*/
+/*Include*/
+/*------------------------------------------------*/
+
+/* Variable */
+// @import "components/_variables";
+
+/* Component */
+@import "components/_text-helpers";
