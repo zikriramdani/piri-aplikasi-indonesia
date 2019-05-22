@@ -16,6 +16,8 @@ var htmlmin = require('gulp-htmlmin');
 var zip = require('gulp-zip');
 var gutil = require('gulp-util');
 
+var devMode = false;
+
 // untuk menjalankan SASS (compile dari SASS menjadi CSS dengan destinasi folder src)
 gulp.task('sass', function () {
   	return gulp.src('./src/assets/sass/*.scss')
@@ -50,23 +52,23 @@ gulp.task('build', function(){
     .pipe(gulp.dest('dist/css'));
 
     // menggabung semua file js dan optimasi
-    var jsOptimize = gulp.src('./src/assets/js/*.js')
+    var jsOptimize = gulp.src('./src/assets/js/**/*.js')
     .pipe(concat('all.js'))
     .pipe(uglify())
     .pipe(gulp.dest('dist/js'));
 
     // optimasi image
-    var imgOptimize = gulp.src('./src/assets/images/*')
-        .pipe(imagemin())
-        .pipe(gulp.dest('dist/images'))
+    var imgOptimize = gulp.src('./src/assets/images/**/*')
+    .pipe(imagemin())
+    .pipe(gulp.dest('dist/images'))
 
     // optimasi html
-    var htmlOptimize = gulp.src('./src/*.html')
+    var htmlOptimize = gulp.src('./src/**/*.html')
     .pipe(htmlmin({collapseWhitespace: true}))
     .pipe(gulp.dest('dist'));
 
     // fonts folder
-    var fonts= gulp.src('./src/assets/fonts/**')
+    var fonts= gulp.src('./src/assets/fonts/**/*')
     .pipe(gulp.dest('dist/fonts'));
 
     return merge(cssOptimize,jsOptimize,imgOptimize,htmlOptimize,fonts); 
@@ -80,17 +82,45 @@ gulp.task('build', function(){
 // });
 
 // gulp.task('cfonts',function(){
-//     gulp.src('./src/assets/fonts/**')
+//     gulp.src('./src/assets/fonts/**/*')
 //     .pipe(gulp.dest('dist/fonts'));
 // });
 
 // Default Task. Local webserver dan sinkronisasi dengan browser. 
 gulp.task('default', function(){
-    browserSync.init({
+    browserSync.init(null, {
+        // open: false,
         server: {
-            baseDir: "./src"
+            baseDir: "./dist/"
         }
     });
+    
     gulp.watch('./src/**/*').on('change', gulp.series(reload));
-    gulp.watch('./src/assets/sass/*.scss', gulp.series('sass'));
+    gulp.watch('./src/assets/sass/**/*.scss', gulp.series(sass));
 });
+
+
+// var gulp        = require('gulp');
+// var browserSync = require('browser-sync').create();
+// var sass        = require('gulp-sass');
+
+// // Static Server + watching scss/html files
+// gulp.task('serve', ['sass'], function() {
+
+//     browserSync.init({
+//         server: "./app"
+//     });
+
+//     gulp.watch("app/scss/*.scss", ['sass']);
+//     gulp.watch("app/*.html").on('change', browserSync.reload);
+// });
+
+// // Compile sass into CSS & auto-inject into browsers
+// gulp.task('sass', function() {
+//     return gulp.src("./src/assets/sass/*.scss")
+//         .pipe(sass())
+//         .pipe(gulp.dest("dist"))
+//         .pipe(browserSync.stream());
+// });
+
+// gulp.task('default', ['serve']);
