@@ -29,8 +29,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     BrowserModule,
     NgbModule,
     AppRoutingModule,
-    AngularFontAwesomeModule,
-    icons
+    // AngularFontAwesomeModule,
+    // icons
   ],
   providers: [],
   bootstrap: [AppComponent]
