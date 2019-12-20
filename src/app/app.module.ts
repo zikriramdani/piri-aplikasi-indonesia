@@ -32,7 +32,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     // AngularFontAwesomeModule,
     // icons
   ],
-  providers: [],
+  providers: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
