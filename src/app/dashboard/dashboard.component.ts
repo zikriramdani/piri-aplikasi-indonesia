@@ -19,7 +19,6 @@ export class DashboardComponent implements OnInit {
 	}
 
 	fetchDashboard() {
-		this.isLoading = true;
 		this.dashboardService.get().subscribe(response => {
 			this.dataDummy = response;
 			this.isLoading = false;
