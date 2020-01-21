@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { DashboardService } from '../dashboard.service';
 
 @Component({
-  	selector: 'app-master',
-  	templateUrl: './master.component.html',
-  	styleUrls: ['./master.component.css']
+  	selector: 'app-register',
+  	templateUrl: './register.component.html',
+  	styleUrls: ['./register.component.css']
 })
-export class MasterComponent implements OnInit {
+export class RegisterComponent implements OnInit {
   	constructor(
 	) { }
 

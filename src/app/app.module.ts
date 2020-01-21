@@ -5,26 +5,34 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import icons from 'glyphicons'
 
 import { AppComponent } from 'src/app/app.component';
-import { LoginComponent } from 'src/app/login/login.component';
-import { MasterModule } from 'src/app/master/master.module';
+import { HeaderComponent }   from 'src/app/master/header/header.component';
+import { NavbarComponent }   from 'src/app/master/navbar/navbar.component';
 import { PageNotFoundComponent }   from 'src/app/master/page-not-found/page-not-found.component';
+import { LoginComponent } from 'src/app/login/login.component';
+import { RegisterComponent } from 'src/app/register/register.component';
+
+// Pages
+import { TransactionComponent }   from 'src/app/transaction/pages/transaction.component';
 
 // Routing Module
 import { AppRoutingModule }  from 'src/app/app.routing.module';
-import { MasterRoutingModule }  from 'src/app/master/master.routing.module';
 
 @NgModule({
   declarations: [
     AppComponent,
+    HeaderComponent,
+    NavbarComponent,
+    PageNotFoundComponent,
     LoginComponent,
-    PageNotFoundComponent
+    RegisterComponent,
+
+    // Pages
+    TransactionComponent
   ],
   imports: [
     BrowserModule,
     NgbModule,
-    AppRoutingModule,
-    MasterRoutingModule,
-    MasterModule,
+    AppRoutingModule
     // AngularFontAwesomeModule,
     // icons
   ],
