@@ -1,54 +1,85 @@
 <div id="logreg-forms">
-	<form class="form-transaction" []>
-		<h1 class="h3 mb-3 font-weight-normal text-center"> Transaction</h1>
-		<div class="row">
-			<div class="align-self-center col-md-4 col-12 d-flex mb-3">
-				Phone Number
-			</div>
-			<div class="col-md-8 col-12 mb-3">
-				<input type="text" id="inputPhone" class="form-control" placeholder="Phone Number">
-			</div>
-		</div>
-		<div class="row">
-			<div class="align-self-center col-md-4 col-12 d-flex mb-3">
-				Operator
-			</div>
-			<div class="col-md-8 col-12 mb-3">
-				<select class="custom-select" id="inputGroupSelect01">
-					<option selected>Choose Operator...</option>
-					<option value="1">Telkomsel</option>
-					<option value="2">XL</option>
-					<option value="3">Three</option>
-				</select>
-			</div>
-		</div>
-		<div class="row">
-			<div class="align-self-center col-md-4 col-12 d-flex mb-3">
-				Pulsa
-			</div>
-			<div class="col-md-8 col-12 mb-3">
-				<select class="custom-select" id="inputGroupSelect01">
-					<option selected>Choose Pulsa...</option>
-					<option value="10.000">10.000</option>
-					<option value="25.000">25.000</option>
-					<option value="50.000">50.000</option>
-				</select>
-			</div>
-		</div>
-		<div class="row">
-			<div class="align-self-center col-md-4 col-12 d-flex mb-3">
-				Harga
-			</div>
-			<div class="col-md-8 col-12 mb-3">
-				<input type="password" id="inputHarga" class="form-control" placeholder="Harga" disabled>
-			</div>
-		</div>
+	<div class="row">
+		<div class="col-12 col-md-6">
+			<form class="form-transaction" [formGroup]="transactionForm" (ngSubmit)="onSubmit()">
+				<h1 class="h3 mb-3 font-weight-normal text-center"> Transaction</h1>
+				<app-alert></app-alert>
 
-		<button routerLink="/transaction" class="btn btn-success btn-block" type="submit">
-			<i class="fas fa-sign-in-alt"></i> Save Transaction
-		</button>
-	</form>
+
+				<div class="row">
+					<div class="align-self-center col-md-4 col-12 d-flex mb-3">
+						Phone Number
+					</div>
+					<div class="col-md-8 col-12 mb-3">
+						<input type="text" formControlName="phoneNumber" class="form-control" placeholder="Phone Number"
+							required [ngClass]="{ 'is-invalid': submitted && f.phoneNumber.errors }">
+						<div *ngIf="submitted && f.phoneNumber.errors" class="invalid-feedback">
+							<div *ngIf="f.phoneNumber.errors.required">Phone Number is required</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="align-self-center col-md-4 col-12 d-flex mb-3">
+						Operator
+					</div>
+					<div class="col-md-8 col-12 mb-3">
+						<select class="custom-select" formControlName="operator" required
+							[ngClass]="{ 'is-invalid': submitted && f.operator.errors }">
+							<option selected>Choose Operator...</option>
+							<option value="1">Telkomsel</option>
+							<option value="2">XL</option>
+							<option value="3">Three</option>
+						</select>
+						<div *ngIf="submitted && f.operator.errors" class="invalid-feedback">
+							<div *ngIf="f.operator.errors.required">Operator is required</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="align-self-center col-md-4 col-12 d-flex mb-3">
+						Pulsa
+					</div>
+					<div class="col-md-8 col-12 mb-3">
+						<select class="custom-select" formControlName="pulsa" required
+							[ngClass]="{ 'is-invalid': submitted && f.pulsa.errors }">
+							<option selected>Choose Pulsa...</option>
+							<option value="10.000">10.000</option>
+							<option value="25.000">25.000</option>
+							<option value="50.000">50.000</option>
+						</select>
+						<div *ngIf="submitted && f.pulsa.errors" class="invalid-feedback">
+							<div *ngIf="f.pulsa.errors.required">Pulsa is required</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="align-self-center col-md-4 col-12 d-flex mb-3">
+						Harga
+					</div>
+					<div class="col-md-8 col-12 mb-3">
+						<input formControlName="harga" class="form-control" disabled>
+					</div>
+				</div>
+
+				<button routerLink="/transaction" class="btn btn-success btn-block" type="submit">
+					<i class="fas fa-sign-in-alt"></i> Save Transaction
+				</button>
+			</form>
+		</div>
+		<div class="col-12 col-md-6">
+			<div class="p-3">
+				<h1 class="h3 mb-3 font-weight-normal text-center">Data Transaction</h1>
+				<div>
+					<p class="mb-0" *ngFor="let transaction of transactions" >
+						<b>{{transaction.phonenumber}}</b>
+					</p>
+				</div>
+				<div *ngIf="transactions.length > 0" class="text-center"><p><b>Not Found Data</b></p></div>
+			</div>
+		</div>
+	</div>
+
 </div>
 <p class="text-center">
-	By Zikri Ramdani <a (click)="logout()">(logout)</a>
+	Hi {{currentUser.firstName}}! <a href="#" (click)="logout()">(logout)</a>
 </p>

@@ -1,21 +1,48 @@
 <div id="logreg-forms">
-	<form class="form-signin">
-		<h1 class="h3 mb-3 font-weight-normal text-center"> Register</h1>
-		<input type="text" id="inputUsername" class="form-control mb-3" placeholder="Firstname" required>
-		<input type="text" id="inputPassword" class="form-control mb-3" placeholder="Lastname" required>
-		<input type="text" id="inputUsername" class="form-control mb-3" placeholder="Username" required>
-		<input type="password" id="inputPassword" class="form-control mb-3" placeholder="Password" required>
+	<form class="form-signin" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+		<h1 class="h3 mt-3 font-weight-normal text-center"> Register</h1>
+		<app-alert></app-alert>
+		
+		<!-- firstName -->
+		<input type="text" formControlName="firstName" class="form-control mt-3" placeholder="Firstname" required
+			[ngClass]="{ 'is-invalid': submitted && f.firstName.errors }">
+		<div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+			<div *ngIf="f.firstName.errors.required">First Name is required</div>
+		</div>
 
-		<div class="row">
+		<!-- lastName -->
+		<input type="text" formControlName="lastName" class="form-control mt-3" placeholder="Lastname" required>
+		<div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+			<div *ngIf="f.lastName.errors.required">Last Name is required</div>
+		</div>
+
+		<!-- Username -->
+		<input type="text" formControlName="username" class="form-control mt-3" placeholder="Username" required>
+		<div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+			<div *ngIf="f.username.errors.required">Username is required</div>
+		</div>
+
+		<!-- Password -->
+		<input type="password" formControlName="password" class="form-control mt-3" placeholder="Password" required>
+		<div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+			<div *ngIf="f.password.errors.required">Password is required</div>
+			<div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+		</div>
+
+		<div class="row mt-3">
 			<div class="col-6">
-				<button routerLink="/login" class="btn btn-success btn-block" type="submit">
-					<i class="fas fa-sign-in-alt"></i> Cancel
+				<button routerLink="/login" class="btn btn-success btn-block">
+					Cancel
 				</button>
 			</div>
 			<div class="col-6">
-				<button routerLink="/register" class="btn btn-primary btn-block" type="submit">
-					<i class="fas fa-user-plus"></i> Register
+				<button [disabled]="loading" class="btn btn-primary btn-block">
+					Register
 				</button>
+				<div class="text-center" *ngIf="loading">
+					<img
+						src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+				</div>
 			</div>
 		</div>
 	</form>
