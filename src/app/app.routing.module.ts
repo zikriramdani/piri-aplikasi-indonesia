@@ -1,13 +1,15 @@
-import { NgModule }             from '@angular/core';
+import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { LoginComponent }   from './login/login.component';
-// import { MasterModule }   from 'src/app/master/master.module';
+import { NotfoundComponent }   from 'src/app/master/notfound/notfound.component';
+import { LoginComponent } from 'src/app/login/login.component';
 
 const appRoutes: Routes = [
+  { path: '**', redirectTo: '/404' },
+  { path: '404', component: NotfoundComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
-  // { path: 'transaction', component: MasterModule },
+  { path: '', loadChildren: 'src/app/master/master.module' },
 ];
 
 @NgModule({
@@ -18,4 +20,4 @@ const appRoutes: Routes = [
     RouterModule
   ]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

@@ -1,7 +1,7 @@
 import { NgModule }             from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { TransactionComponent }   from '../transaction/transaction.component';
+import { TransactionComponent }   from 'src/app/transaction/pages/transaction.component';
 
 const appRoutes: Routes = [
   { path: 'transaction', component: TransactionComponent}

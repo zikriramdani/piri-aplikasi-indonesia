@@ -4,17 +4,19 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import icons from 'glyphicons'
 
-import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
-import { MasterModule } from './master/master.module';
+import { AppComponent } from 'src/app/app.component';
+import { LoginComponent } from 'src/app/login/login.component';
+import { MasterModule } from 'src/app/master/master.module';
+import { NotfoundComponent }   from 'src/app/master/notfound/notfound.component';
 
 // Routing Module
-import { AppRoutingModule }  from './app.routing.module';
+import { AppRoutingModule }  from 'src/app/app.routing.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
+    NotfoundComponent
   ],
   imports: [
     BrowserModule,

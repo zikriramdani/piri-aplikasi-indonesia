@@ -4,14 +4,14 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import icons from 'glyphicons'
 
-import { MasterComponent } from './master.component';
-import { HeaderComponent } from './header/header.component';
-import { NavbarComponent } from './navbar/navbar.component';
-import { FooterComponent } from './footer/footer.component';
-import { TransactionComponent } from '../transaction/transaction.component';
+import { MasterComponent } from 'src/app/master/master.component';
+import { HeaderComponent } from 'src/app/master/header/header.component';
+import { NavbarComponent } from 'src/app/master/navbar/navbar.component';
+import { FooterComponent } from 'src/app/master/footer/footer.component';
+import { TransactionComponent } from 'src/app/transaction/pages/transaction.component';
 
 // Routing Module
-import { MasterRoutingModule }  from './master.routing.module';
+import { MasterRoutingModule }  from 'src/app/master/master.routing.module';
 
 
 @NgModule({
@@ -32,6 +32,6 @@ import { MasterRoutingModule }  from './master.routing.module';
   ],
   providers: [
   ],
-  // bootstrap: [MasterComponent]
+  bootstrap: [MasterComponent]
 })
 export class MasterModule { }
