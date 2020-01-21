@@ -1,6 +1,6 @@
 <div id="logreg-forms">
 	<p class="mb-0 pt-3 px-3 text-right">
-		Hi {{currentUser.firstName}}! <b (click)="logout()">(logout)</b>
+		Hi {{currentUser.firstName}}! <b class="cursor-pointer" (click)="logout()">(logout)</b>
 	</p>
 	<div class="row">
 		<div class="col-12">
@@ -45,7 +45,7 @@
 					<div class="col-md-8 col-12 mb-3">
 						<select class="custom-select" formControlName="pulsa" required value=""
 							[ngClass]="{ 'is-invalid': submitted && f.pulsa.errors }"
-							(change)="onChange($event.target.value)">
+							(change)="onChange($event)" [ngModel]="selectedPulsa">
 							<option value="">Choose Pulsa...</option>
 							<option *ngFor="let pulsa of pulsas" [value]="pulsa.pulsa">
 								{{pulsa.pulsa}}
@@ -61,7 +61,7 @@
 						Harga
 					</div>
 					<div class="col-md-8 col-12 mb-3">
-						<input formControlName="harga" class="form-control" disabled>
+						<input formControlName="harga" class="form-control" disabled [ngModel]="hargaModel">
 					</div>
 				</div>
 

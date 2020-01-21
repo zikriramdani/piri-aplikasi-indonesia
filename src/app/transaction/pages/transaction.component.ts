@@ -21,11 +21,11 @@ export class TransactionComponent implements OnInit {
     currentUserSubscription: Subscription;
     transactions: Transaction[] = [];
 
-    public selectedOperator = "Choose Operator...";
-    public selectedPulsa = "Choose Pulsa...";
+    public selectedPulsa = "";
 
     operators: Array<object>;
-    pulsas: Array<object>;
+    pulsas: any;
+    hargaModel: any;
 
     constructor(
         private router: Router,
@@ -98,8 +98,10 @@ export class TransactionComponent implements OnInit {
         });
     }
 
-    onChange(deviceValue) {
-        console.log(deviceValue);
+    onChange($event) {
+        this.loadAllPulsa();
+        this.hargaModel = this.pulsas;
+        console.log('onCHange', this.hargaModel );
     }
 
     private loadAllOperator() {
@@ -112,6 +114,11 @@ export class TransactionComponent implements OnInit {
 		this.pulsaService.getAll().subscribe(pulsas => {
             this.pulsas = pulsas;
 		});
-	}
+    }
+    
+    logout() {
+        this.authenticationService.logout();
+        this.router.navigate(['/login']);
+    }
 
 }

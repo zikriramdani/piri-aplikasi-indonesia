@@ -1,5 +1,7 @@
+.cursor-pointer {
+    cursor: pointer;
+}
 
-/* sign in FORM */
 #logreg-forms{
     width:912px;
     margin:10vh auto;
