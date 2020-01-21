@@ -1,5 +1,44 @@
-<div class="jumbotron mt-3" style="background-color: #fff;">
-	<p>
-	  dashboard works!
-	</p>
+<div id="logreg-forms">
+	<form class="form-signin">
+		<h1 class="h3 mb-3 font-weight-normal text-center"> Transaction</h1>
+		<div class="row">
+			<div class="align-self-center col-md-5 col-12 d-flex mb-3">
+				Phone Number
+			</div>
+			<div class="col-md-7 col-12 mb-3">
+				<input type="text" id="inputPhone" class="form-control" placeholder="Phone Number">
+			</div>
+		</div>
+		<div class="row">
+			<div class="align-self-center col-md-5 col-12 d-flex mb-3">
+				Operator
+			</div>
+			<div class="col-md-7 col-12 mb-3">
+				<input type="text" id="inputOperator" class="form-control" placeholder="Operator">
+			</div>
+		</div>
+		<div class="row">
+			<div class="align-self-center col-md-5 col-12 d-flex mb-3">
+				Pulsa
+			</div>
+			<div class="col-md-7 col-12 mb-3">
+				<input type="number" id="inputPulsa" class="form-control" placeholder="Pulsa">
+			</div>
+		</div>
+		<div class="row">
+			<div class="align-self-center col-md-5 col-12 d-flex mb-3">
+				Harga
+			</div>
+			<div class="col-md-7 col-12 mb-3">
+				<input type="password" id="inputHarga" class="form-control" placeholder="Harga">
+			</div>
+		</div>
+
+		<button routerLink="/transaction" class="btn btn-success btn-block" type="submit">
+			<i class="fas fa-sign-in-alt"></i> Save Transaction
+		</button>
+	</form>
 </div>
+<p class="text-center">
+	<a href="#">By Zikri Ramdani</a>
+</p>

@@ -10,7 +10,6 @@ import { MasterModule } from './master/master.module';
 
 // Routing Module
 import { AppRoutingModule }  from './app.routing.module';
-import { MasterRoutingModule }  from './master/master.routing.module';
 
 @NgModule({
   declarations: [
@@ -22,7 +21,6 @@ import { MasterRoutingModule }  from './master/master.routing.module';
     NgbModule,
     AppRoutingModule,
     MasterModule,
-    MasterRoutingModule
     // AngularFontAwesomeModule,
     // icons
   ],
