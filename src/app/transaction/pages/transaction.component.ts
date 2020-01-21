@@ -49,10 +49,10 @@ export class TransactionComponent implements OnInit {
             harga: ['', Validators.required]
         });
 
-        this.loadAllTransaction();
-        this.resetForm();
         this.loadAllOperator();
         this.loadAllPulsa();
+        this.loadAllTransaction();
+        this.resetForm();
     }
 
     // convenience getter for easy access to form fields
