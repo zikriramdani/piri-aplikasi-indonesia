@@ -8,14 +8,14 @@ export class TransactionService {
     constructor(private http: HttpClient) { }
 
     getAll() {
-        return this.http.get<Transaction[]>('/users');
+        return this.http.get<Transaction[]>('/transactions');
     }
 
     getById(id: number) {
-        return this.http.get('/users/' + id);
+        return this.http.get('/transactions/' + id);
     }
 
     register(transaction: Transaction) {
-        return this.http.post('/users/register', transaction);
+        return this.http.post('/transactions/register', transaction);
     }
 }

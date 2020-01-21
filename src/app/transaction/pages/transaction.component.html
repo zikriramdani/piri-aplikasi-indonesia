@@ -1,6 +1,9 @@
 <div id="logreg-forms">
+	<p class="mb-0 pt-3 px-3 text-right">
+		Hi {{currentUser.firstName}}! <b (click)="logout()">(logout)</b>
+	</p>
 	<div class="row">
-		<div class="col-12 col-md-6">
+		<div class="col-12">
 			<form class="form-transaction" [formGroup]="transactionForm" (ngSubmit)="onSubmit()">
 				<h1 class="h3 mb-3 font-weight-normal text-center"> Transaction</h1>
 				<app-alert></app-alert>
@@ -23,12 +26,12 @@
 						Operator
 					</div>
 					<div class="col-md-8 col-12 mb-3">
-						<select class="custom-select" formControlName="operator" required
+						<select class="custom-select" formControlName="operator" required value=""
 							[ngClass]="{ 'is-invalid': submitted && f.operator.errors }">
-							<option selected>Choose Operator...</option>
-							<option value="1">Telkomsel</option>
-							<option value="2">XL</option>
-							<option value="3">Three</option>
+							<option value="">Choose Operator...</option>
+							<option *ngFor="let operator of operators" [value]="operator.name">
+								{{operator.name}}
+							</option>
 						</select>
 						<div *ngIf="submitted && f.operator.errors" class="invalid-feedback">
 							<div *ngIf="f.operator.errors.required">Operator is required</div>
@@ -40,12 +43,13 @@
 						Pulsa
 					</div>
 					<div class="col-md-8 col-12 mb-3">
-						<select class="custom-select" formControlName="pulsa" required
-							[ngClass]="{ 'is-invalid': submitted && f.pulsa.errors }">
-							<option selected>Choose Pulsa...</option>
-							<option value="10.000">10.000</option>
-							<option value="25.000">25.000</option>
-							<option value="50.000">50.000</option>
+						<select class="custom-select" formControlName="pulsa" required value=""
+							[ngClass]="{ 'is-invalid': submitted && f.pulsa.errors }"
+							(change)="onChange($event.target.value)">
+							<option value="">Choose Pulsa...</option>
+							<option *ngFor="let pulsa of pulsas" [value]="pulsa.pulsa">
+								{{pulsa.pulsa}}
+							</option>
 						</select>
 						<div *ngIf="submitted && f.pulsa.errors" class="invalid-feedback">
 							<div *ngIf="f.pulsa.errors.required">Pulsa is required</div>
@@ -66,20 +70,31 @@
 				</button>
 			</form>
 		</div>
-		<div class="col-12 col-md-6">
+		<hr>
+		<div class="col-12">
 			<div class="p-3">
 				<h1 class="h3 mb-3 font-weight-normal text-center">Data Transaction</h1>
-				<div>
-					<p class="mb-0" *ngFor="let transaction of transactions" >
-						<b>{{transaction.phonenumber}}</b>
-					</p>
+
+				<div class="table-responsive">
+					<table class="table">
+						<thead>
+							<th>Phone Number</th>
+							<th>Operator</th>
+							<th>Pulsa</th>
+							<th>Harga</th>
+						</thead>
+
+						<tbody>
+							<tr *ngFor="let transaction of transactions">
+								<td>{{transaction.phoneNumber}}</td>
+								<td>{{transaction.operator}}</td>
+								<td>{{transaction.pulsa}}</td>
+								<td>{{transaction.harga}}</td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
-				<div *ngIf="transactions.length > 0" class="text-center"><p><b>Not Found Data</b></p></div>
 			</div>
 		</div>
 	</div>
-
 </div>
-<p class="text-center">
-	Hi {{currentUser.firstName}}! <a href="#" (click)="logout()">(logout)</a>
-</p>

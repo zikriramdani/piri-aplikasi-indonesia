@@ -4,29 +4,37 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { first } from 'rxjs/operators';
 
-import { User, Transaction } from 'src/app/models';
-import { AlertService, TransactionService, AuthenticationService } from 'src/app/services';
+import { User, Transaction, Pulsa } from 'src/app/models';
+import { AlertService, TransactionService, PulsaService, OperatorService, AuthenticationService } from 'src/app/services';
 
 @Component({
-  	selector: 'app-transaction',
-  	templateUrl: './transaction.component.html',
-  	styleUrls: ['./transaction.component.css']
+    selector: 'app-transaction',
+    templateUrl: './transaction.component.html',
+    styleUrls: ['./transaction.component.css']
 })
 export class TransactionComponent implements OnInit {
     transactionForm: FormGroup;
-	loading = false;
+    loading = false;
     submitted = false;
-    
-	currentUser: User;
+
+    currentUser: User;
     currentUserSubscription: Subscription;
     transactions: Transaction[] = [];
+
+    public selectedOperator = "Choose Operator...";
+    public selectedPulsa = "Choose Pulsa...";
+
+    operators: Array<object>;
+    pulsas: Array<object>;
 
     constructor(
         private router: Router,
         private formBuilder: FormBuilder,
-		private alertService: AlertService,
+        private alertService: AlertService,
         private authenticationService: AuthenticationService,
         private transactionService: TransactionService,
+        private pulsaService: PulsaService,
+        private operatorService: OperatorService,
     ) {
         this.currentUserSubscription = this.authenticationService.currentUser.subscribe(user => {
             this.currentUser = user;
@@ -35,17 +43,20 @@ export class TransactionComponent implements OnInit {
 
     ngOnInit() {
         this.transactionForm = this.formBuilder.group({
-			phoneNumber: ['', Validators.required],
-			operator: ['', Validators.required],
+            phoneNumber: ['', Validators.required],
+            operator: ['', Validators.required],
             pulsa: ['', Validators.required],
             harga: ['', Validators.required]
         });
-        
+
         this.loadAllTransaction();
+        this.resetForm();
+        this.loadAllOperator();
+        this.loadAllPulsa();
     }
 
     // convenience getter for easy access to form fields
-	get f() { return this.transactionForm.controls; }
+    get f() { return this.transactionForm.controls; }
 
     ngOnDestroy() {
         // unsubscribe to ensure no memory leaks
@@ -59,22 +70,48 @@ export class TransactionComponent implements OnInit {
     }
 
     onSubmit() {
-		this.submitted = true;
+        this.submitted = true;
 
-		// stop here if form is invalid
-		if (this.transactionForm.invalid) {
-			return;
-		}
+        // stop here if form is invalid
+        if (this.transactionForm.invalid) {
+            return;
+        }
 
-		this.loading = true;
-		this.transactionService.register(this.transactionForm.value).pipe(first()).subscribe(
-			data => {
-				this.alertService.success('Transaction successful', true);
-				this.router.navigate(['/transaction']);
-			},
-			error => {
-				this.alertService.error(error);
-				this.loading = false;
-			});
+        this.loading = true;
+        this.transactionService.register(this.transactionForm.value).pipe(first()).subscribe(
+            data => {
+                this.alertService.success('Transaction successful', true);
+                window.location.reload();
+            },
+            error => {
+                this.alertService.error(error);
+                this.loading = false;
+            });
+    }
+
+    resetForm() {
+        this.transactionForm.reset({
+            'phoneNumber': '',
+            'operator': '',
+            'pulsa': '',
+            'harga': ''
+        });
+    }
+
+    onChange(deviceValue) {
+        console.log(deviceValue);
+    }
+
+    private loadAllOperator() {
+		this.operatorService.getAll().subscribe(operators => {
+            this.operators = operators;
+		});
 	}
+
+    private loadAllPulsa() {
+		this.pulsaService.getAll().subscribe(pulsas => {
+            this.pulsas = pulsas;
+		});
+	}
+
 }
