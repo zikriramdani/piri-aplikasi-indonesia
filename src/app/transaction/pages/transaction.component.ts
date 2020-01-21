@@ -69,6 +69,18 @@ export class TransactionComponent implements OnInit {
         });
     }
 
+    private loadAllOperator() {
+		this.operatorService.getAll().subscribe(operators => {
+            this.operators = operators;
+		});
+	}
+
+    private loadAllPulsa() {
+		this.pulsaService.getAll().subscribe(pulsas => {
+            this.pulsas = pulsas;
+		});
+    }
+
     onSubmit() {
         this.submitted = true;
 
@@ -104,18 +116,6 @@ export class TransactionComponent implements OnInit {
         console.log('onCHange', this.hargaModel );
     }
 
-    private loadAllOperator() {
-		this.operatorService.getAll().subscribe(operators => {
-            this.operators = operators;
-		});
-	}
-
-    private loadAllPulsa() {
-		this.pulsaService.getAll().subscribe(pulsas => {
-            this.pulsas = pulsas;
-		});
-    }
-    
     logout() {
         this.authenticationService.logout();
         this.router.navigate(['/login']);
