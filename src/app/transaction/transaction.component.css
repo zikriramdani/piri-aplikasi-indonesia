@@ -1,7 +1,7 @@
 
 /* sign in FORM */
 #logreg-forms{
-    width:412px;
+    width:612px;
     margin:10vh auto;
     background-color:#f3f3f3;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
@@ -9,7 +9,7 @@
 }
 #logreg-forms form {
     width: 100%;
-    max-width: 410px;
+    max-width: 610px;
     padding: 15px;
     margin: auto;
 }
@@ -21,21 +21,14 @@
     font-size: 16px;
 }
 #logreg-forms .form-control:focus { z-index: 2; }
-#logreg-forms .form-signin input[type="email"] {
+#logreg-forms .form-transaction input[type="email"] {
     margin-bottom: -1px;
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0;
 }
-#logreg-forms .form-signin input[type="password"] {
+#logreg-forms .form-transaction input[type="password"] {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
-}
-
-#logreg-forms .social-btn{
-    font-weight: 100;
-    color:white;
-    width:190px;
-    font-size: 0.9rem;
 }
 
 #logreg-forms a{
