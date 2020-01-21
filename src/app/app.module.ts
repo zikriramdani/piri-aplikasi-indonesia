@@ -5,30 +5,24 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import icons from 'glyphicons'
 
 import { AppComponent } from './app.component';
-import { EcommerceComponent } from './ecommerce/ecommerce.component';
-import { HeaderComponent } from './header/header.component';
-import { FooterComponent } from './footer/footer.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { OcrComponent } from './ocr/ocr.component';
+import { LoginComponent } from './login/login.component';
+import { MasterModule } from './master/master.module';
 
 // Routing Module
 import { AppRoutingModule }  from './app.routing.module';
-import { NavbarComponent } from './navbar/navbar.component';
+import { MasterRoutingModule }  from './master/master.routing.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    EcommerceComponent,
-    HeaderComponent,
-    FooterComponent,
-    DashboardComponent,
-    OcrComponent,
-    NavbarComponent
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
     NgbModule,
     AppRoutingModule,
+    MasterModule,
+    MasterRoutingModule
     // AngularFontAwesomeModule,
     // icons
   ],

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EcommerceComponent } from './ecommerce.component';
+import { MasterComponent } from './master.component';
 
-describe('EcommerceComponent', () => {
-  let component: EcommerceComponent;
-  let fixture: ComponentFixture<EcommerceComponent>;
+describe('MasterComponent', () => {
+  let component: MasterComponent;
+  let fixture: ComponentFixture<MasterComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EcommerceComponent ]
+      declarations: [ MasterComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(EcommerceComponent);
+    fixture = TestBed.createComponent(MasterComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
