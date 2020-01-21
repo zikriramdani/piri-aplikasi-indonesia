@@ -7,21 +7,23 @@ import icons from 'glyphicons'
 import { AppComponent } from 'src/app/app.component';
 import { LoginComponent } from 'src/app/login/login.component';
 import { MasterModule } from 'src/app/master/master.module';
-import { NotfoundComponent }   from 'src/app/master/notfound/notfound.component';
+import { PageNotFoundComponent }   from 'src/app/master/page-not-found/page-not-found.component';
 
 // Routing Module
 import { AppRoutingModule }  from 'src/app/app.routing.module';
+import { MasterRoutingModule }  from 'src/app/master/master.routing.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    NotfoundComponent
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
     NgbModule,
     AppRoutingModule,
+    MasterRoutingModule,
     MasterModule,
     // AngularFontAwesomeModule,
     // icons

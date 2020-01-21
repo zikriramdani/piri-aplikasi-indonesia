@@ -13,9 +13,7 @@ import { TransactionComponent } from 'src/app/transaction/pages/transaction.comp
 // Routing Module
 import { MasterRoutingModule }  from 'src/app/master/master.routing.module';
 
-
 @NgModule({
-  // exports: [MasterComponent],
   declarations: [
     MasterComponent,
     HeaderComponent,

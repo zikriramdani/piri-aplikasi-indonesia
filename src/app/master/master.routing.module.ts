@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { TransactionComponent }   from 'src/app/transaction/pages/transaction.component';
 
 const appRoutes: Routes = [
-  { path: 'transaction', component: TransactionComponent}
+  { path: 'trans', component: TransactionComponent}
 ];
 
 @NgModule({
