@@ -1,7 +1,7 @@
 <div id="logreg-forms">
 	<form class="form-signin" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
 		<h1 class="h3 mb-3 font-weight-normal text-center"> Login</h1>
-		<app-alert></app-alert>
+
 		<input type="text" formControlName="username" class="form-control" placeholder="Username" required
 			[ngClass]="{ 'is-invalid': submitted && f.username.errors }">
 		<div *ngIf="submitted && f.username.errors" class="invalid-feedback">

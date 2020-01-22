@@ -11,11 +11,11 @@ export class TransactionService {
         return this.http.get<Transaction[]>('/transactions');
     }
 
-    getById(id: number) {
-        return this.http.get('/transactions/' + id);
-    }
-
     register(transaction: Transaction) {
         return this.http.post('/transactions/register', transaction);
+    }
+
+    delete(id: number) {
+        return this.http.delete('/transactions/' + id);
     }
 }

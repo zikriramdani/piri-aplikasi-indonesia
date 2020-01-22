@@ -6,8 +6,6 @@
 		<div class="col-12">
 			<form class="form-transaction" [formGroup]="transactionForm" (ngSubmit)="onSubmit()">
 				<h1 class="h3 mb-3 font-weight-normal text-center"> Transaction</h1>
-				<app-alert></app-alert>
-
 
 				<div class="row">
 					<div class="align-self-center col-md-4 col-12 d-flex mb-3">
@@ -61,7 +59,7 @@
 						Harga
 					</div>
 					<div class="col-md-8 col-12 mb-3">
-						<input formControlName="harga" class="form-control" disabled [ngModel]="hargaModel">
+						<input formControlName="harga" class="form-control" disabled [ngModel]="harga">
 					</div>
 				</div>
 
@@ -82,6 +80,7 @@
 							<th>Operator</th>
 							<th>Pulsa</th>
 							<th>Harga</th>
+							<th>Action</th>
 						</thead>
 
 						<tbody>
@@ -90,6 +89,7 @@
 								<td>{{transaction.operator}}</td>
 								<td>{{transaction.pulsa}}</td>
 								<td>{{transaction.harga}}</td>
+								<td><a class="text-danger cursor-pointer" (click)="deleteTransaction(transaction.id)">Delete</a></td>
 							</tr>
 						</tbody>
 					</table>

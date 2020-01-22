@@ -68,23 +68,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 }
             }
 
-            // get user by id
-            if (request.url.match(/\/users\/\d+$/) && request.method === 'GET') {
-                // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
-                if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
-                    // find user by id in users array
-                    let urlParts = request.url.split('/');
-                    let id = parseInt(urlParts[urlParts.length - 1]);
-                    let matchedUsers = users.filter(user => { return user.id === id; });
-                    let user = matchedUsers.length ? matchedUsers[0] : null;
-
-                    return of(new HttpResponse({ status: 200, body: user }));
-                } else {
-                    // return 401 not authorised if token is null or invalid
-                    return throwError({ status: 401, error: { message: 'Unauthorised' } });
-                }
-            }
-
             // register user
             if (request.url.endsWith('/users/register') && request.method === 'POST') {
                 // get new user object from post body
@@ -116,23 +99,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 }
             }
 
-            // get transaction by id
-            if (request.url.match(/\/transactions\/\d+$/) && request.method === 'GET') {
-                // check for fake auth token in header and return transaction if valid, this security is implemented server side in a real application
-                if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
-                    // find transaction by id in transactions array
-                    let urlParts = request.url.split('/');
-                    let id = parseInt(urlParts[urlParts.length - 1]);
-                    let matchedTransactions = transactions.filter(transaction => { return transaction.id === id; });
-                    let transaction = matchedTransactions.length ? matchedTransactions[0] : null;
-
-                    return of(new HttpResponse({ status: 200, body: transaction }));
-                } else {
-                    // return 401 not authorised if token is null or invalid
-                    return throwError({ status: 401, error: { message: 'Unauthorised' } });
-                }
-            }
-
             // register transaction
             if (request.url.endsWith('/transactions/register') && request.method === 'POST') {
                 // get new transaction object from post body
@@ -145,6 +111,31 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
                 // respond 200 OK
                 return of(new HttpResponse({ status: 200 }));
+            }
+
+            // delete transaction
+            if (request.url.match(/\/transactions\/\d+$/) && request.method === 'DELETE') {
+                // check for fake auth token in header and return transaction if valid, this security is implemented server side in a real application
+                if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
+                    // find transaction by id in transactions array
+                    let urlParts = request.url.split('/');
+                    let id = parseInt(urlParts[urlParts.length - 1]);
+                    for (let i = 0; i < transactions.length; i++) {
+                        let transaction = transactions[i];
+                        if (transaction.id === id) {
+                            // delete transaction
+                            transactions.splice(i, 1);
+                            localStorage.setItem('transactions', JSON.stringify(transactions));
+                            break;
+                        }
+                    }
+
+                    // respond 200 OK
+                    return of(new HttpResponse({ status: 200 }));
+                } else {
+                    // return 401 not authorised if token is null or invalid
+                    return throwError({ status: 401, error: { message: 'Unauthorised' } });
+                }
             }
 
             // get pulsa

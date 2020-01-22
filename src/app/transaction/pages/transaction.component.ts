@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { first } from 'rxjs/operators';
 
-import { User, Transaction, Pulsa } from 'src/app/models';
+import { User, Transaction, Pulsa, Operator } from 'src/app/models';
 import { AlertService, TransactionService, PulsaService, OperatorService, AuthenticationService } from 'src/app/services';
 
 @Component({
@@ -23,9 +23,10 @@ export class TransactionComponent implements OnInit {
 
     public selectedPulsa = "";
 
-    operators: Array<object>;
-    pulsas: any;
-    hargaModel: any;
+    operators: Operator[] = [];
+    pulsas: Pulsa[] = [];
+    harga: any;
+    dataIndex: any;
 
     constructor(
         private router: Router,
@@ -70,15 +71,15 @@ export class TransactionComponent implements OnInit {
     }
 
     private loadAllOperator() {
-		this.operatorService.getAll().subscribe(operators => {
+        this.operatorService.getAll().subscribe(operators => {
             this.operators = operators;
-		});
-	}
+        });
+    }
 
     private loadAllPulsa() {
-		this.pulsaService.getAll().subscribe(pulsas => {
+        this.pulsaService.getAll().subscribe(pulsas => {
             this.pulsas = pulsas;
-		});
+        });
     }
 
     onSubmit() {
@@ -110,10 +111,17 @@ export class TransactionComponent implements OnInit {
         });
     }
 
-    onChange($event) {
+    onChange(event: any) {
         this.loadAllPulsa();
-        this.hargaModel = this.pulsas;
-        console.log('onCHange', this.hargaModel );
+        this.harga = this.pulsas;
+        console.log('onCHange', this.pulsas[this.dataIndex - 1].harga);
+    }
+
+    deleteTransaction(id: number) {
+        this.transactionService.delete(id).pipe(first()).subscribe(() => {
+            this.loadAllTransaction();
+            this.alertService.success('Delete Transaction successful', true);
+        });
     }
 
     logout() {
