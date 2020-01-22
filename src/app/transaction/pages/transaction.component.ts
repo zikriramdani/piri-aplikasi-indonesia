@@ -96,7 +96,8 @@ export class TransactionComponent implements OnInit {
         this.transactionService.register(this.transactionForm.value).pipe(first()).subscribe(
             data => {
                 this.alertService.success('Transaction successful', true);
-                window.location.reload();
+                this.router.navigate(['/transaksi']);
+                this.loadAllTransaction();
             },
             error => {
                 this.alertService.error(error);
