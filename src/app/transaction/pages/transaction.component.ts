@@ -25,8 +25,7 @@ export class TransactionComponent implements OnInit {
 
     operators: Operator[] = [];
     pulsas: Pulsa[] = [];
-    harga: any;
-    dataIndex: any;
+    hargaModel: any;
 
     constructor(
         private router: Router,
@@ -113,8 +112,8 @@ export class TransactionComponent implements OnInit {
 
     onChange(event: any) {
         this.loadAllPulsa();
-        this.harga = this.pulsas;
-        console.log('onCHange', this.pulsas[this.dataIndex - 1].harga);
+        const index = this.pulsas.findIndex(x => x.pulsa === this.transactionForm.get('pulsa').value);
+        this.hargaModel = this.pulsas[index].harga;
     }
 
     deleteTransaction(id: number) {
