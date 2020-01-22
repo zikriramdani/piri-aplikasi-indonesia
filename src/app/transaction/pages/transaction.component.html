@@ -42,8 +42,8 @@
 					</div>
 					<div class="col-md-8 col-12 mb-3">
 						<select class="custom-select" formControlName="pulsa" required value=""
-							[ngClass]="{ 'is-invalid': submitted && f.pulsa.errors }"
-							(change)="onChange($event)" [ngModel]="selectedPulsa">
+							[ngClass]="{ 'is-invalid': submitted && f.pulsa.errors }" (change)="onChange($event)"
+							[ngModel]="selectedPulsa">
 							<option value="">Choose Pulsa...</option>
 							<option *ngFor="let pulsa of pulsas" [value]="pulsa.pulsa">
 								{{pulsa.pulsa}}
@@ -84,13 +84,25 @@
 						</thead>
 
 						<tbody>
-							<tr *ngFor="let transaction of transactions">
-								<td>{{transaction.phoneNumber}}</td>
-								<td>{{transaction.operator}}</td>
-								<td>{{transaction.pulsa}}</td>
-								<td>{{transaction.harga}}</td>
-								<td><a class="text-danger cursor-pointer pt-0" (click)="deleteTransaction(transaction.id)">Delete</a></td>
+							<tr *ngIf="isLoading; else transactionFetch">
+								<td colspan="5" class="text-center"> Loading...</td>
 							</tr>
+
+							<ng-template #transactionFetch>
+								<tr *ngFor="let transaction of transactions;let i = index;">
+									<td>{{transaction.phoneNumber}}</td>
+									<td>{{transaction.operator}}</td>
+									<td>{{transaction.pulsa}}</td>
+									<td>{{transaction.harga}}</td>
+									<td><a class="text-danger cursor-pointer pt-0"
+											(click)="deleteTransaction(transaction.id)">Delete</a></td>
+								</tr>
+							</ng-template>
+
+							<tr *ngIf="!isLoading && transactions == 0">
+								<td colspan="5" class="text-center">No data</td>
+							</tr>		
+
 						</tbody>
 					</table>
 				</div>

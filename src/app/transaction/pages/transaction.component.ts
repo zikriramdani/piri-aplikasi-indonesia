@@ -26,6 +26,7 @@ export class TransactionComponent implements OnInit {
     operators: Operator[] = [];
     pulsas: Pulsa[] = [];
     hargaModel: any;
+    isLoading = true;
 
     constructor(
         private router: Router,
@@ -64,8 +65,10 @@ export class TransactionComponent implements OnInit {
     }
 
     private loadAllTransaction() {
+        // this.loading = true;
         this.transactionService.getAll().pipe(first()).subscribe(transactions => {
             this.transactions = transactions;
+            this.isLoading = false;
         });
     }
 
