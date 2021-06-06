@@ -1,6 +1,6 @@
 # https://piri-aplikasi-indonesia.netlify.app
 
-![result](https://github.com/zikriramdani/employee-managament/blob/master/screencapture-piri-aplikasi-indonesia.png)
+![result](https://github.com/zikriramdani/piri-aplikasi-indonesia/blob/master/screencapture-piri-aplikasi-indonesia.png)
 
 # Piri Aplikasi Indonesia
 
